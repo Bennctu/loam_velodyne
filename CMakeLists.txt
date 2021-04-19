@@ -48,8 +48,8 @@ if (CATKIN_ENABLE_TESTING)
   add_custom_target(${PROJECT_NAME}_test_data
     COMMAND ${CMAKE_COMMAND} -E tar -xzf velodyne_loam_test_data.tar.gz
     DEPENDS ${PROJECT_NAME}_test_data.tar.gz)
-  configure_file(tests/loam.test.in
-                 ${PROJECT_BINARY_DIR}/test/loam.test)
+  #configure_file(tests/loam.test.in
+  #               ${PROJECT_BINARY_DIR}/test/loam.test)
   add_rostest(${PROJECT_BINARY_DIR}/test/loam.test
     DEPENDENCIES
       ${PROJECT_NAME}_test_data
