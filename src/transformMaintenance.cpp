@@ -162,15 +162,17 @@ void laserOdometryHandler(const nav_msgs::Odometry::ConstPtr& laserOdometry)
 
   geoQuat = tf::createQuaternionMsgFromRollPitchYaw
             (transformMapped[2], -transformMapped[0], -transformMapped[1]);
+  geometry_msgs::Quaternion modifi_q = tf::createQuaternionMsgFromRollPitchYaw
+  			(transformMapped[1], -transformMapped[2], -transformMapped[0]);
 
   laserOdometry2.header.stamp = laserOdometry->header.stamp;
-  laserOdometry2.pose.pose.orientation.x = -geoQuat.y;
-  laserOdometry2.pose.pose.orientation.y = -geoQuat.z;
-  laserOdometry2.pose.pose.orientation.z = geoQuat.x;
-  laserOdometry2.pose.pose.orientation.w = geoQuat.w;
-  laserOdometry2.pose.pose.position.x = transformMapped[3];
-  laserOdometry2.pose.pose.position.y = transformMapped[4];
-  laserOdometry2.pose.pose.position.z = transformMapped[5];
+  laserOdometry2.pose.pose.orientation.x = -modifi_q.y;
+  laserOdometry2.pose.pose.orientation.y = -modifi_q.z;
+  laserOdometry2.pose.pose.orientation.z = modifi_q.x;
+  laserOdometry2.pose.pose.orientation.w = modifi_q.w;
+  laserOdometry2.pose.pose.position.x = transformMapped[5];
+  laserOdometry2.pose.pose.position.y = transformMapped[3];
+  laserOdometry2.pose.pose.position.z = transformMapped[4];
   pubLaserOdometry2Pointer->publish(laserOdometry2);
 
   laserOdometryTrans2.stamp_ = laserOdometry->header.stamp;
