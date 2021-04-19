@@ -668,7 +668,7 @@ int main(int argc, char** argv)
   ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2> 
                                   ("/velodyne_points", 2, laserCloudHandler);
 
-  ros::Subscriber subImu = nh.subscribe<sensor_msgs::Imu> ("/imu/data", 50, imuHandler);
+  ros::Subscriber subImu = nh.subscribe<sensor_msgs::Imu> ("/dji_sdk/imu", 50, imuHandler);
 
   pubLaserCloud = nh.advertise<sensor_msgs::PointCloud2>
                                  ("/velodyne_cloud_2", 2);
